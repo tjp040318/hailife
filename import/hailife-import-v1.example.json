@@ -1,0 +1,144 @@
+{
+  "format": "hailife-import",
+  "schemaVersion": 1,
+  "generatedBy": "ChatGPT",
+  "generatedAt": "2026-09-30",
+  "profile": {
+    "ageRange": "25-34",
+    "sex": "female",
+    "height": { "value": 168, "unit": "cm" },
+    "weightTrend": [
+      { "date": "2026-07-01", "weight": { "value": 66.0, "unit": "kg" } },
+      { "date": "2026-08-01", "weight": { "value": 65.4, "unit": "kg" } },
+      { "date": "2026-09-01", "weight": { "value": 65.1, "unit": "kg" } }
+    ],
+    "experience": "intermediate",
+    "trainingYears": 2
+  },
+  "goals": {
+    "focus": ["strength", "endurance", "sleep"],
+    "primary": "strength",
+    "why": "I want to deadlift 1.5x bodyweight and finish a 100 km ride in the spring."
+  },
+  "training": {
+    "sessions": [
+      {
+        "date": "2026-09-28",
+        "type": "strength",
+        "name": "Lower body",
+        "durationMinutes": 55,
+        "exercises": [
+          {
+            "name": "Back squat",
+            "sets": [
+              { "reps": 5, "weight": { "value": 70, "unit": "kg" } },
+              { "reps": 5, "weight": { "value": 70, "unit": "kg" } },
+              { "reps": 5, "weight": { "value": 70, "unit": "kg" } }
+            ]
+          },
+          {
+            "name": "Romanian deadlift",
+            "sets": [
+              { "reps": 8, "weight": { "value": 60, "unit": "kg" } },
+              { "reps": 8, "weight": { "value": 60, "unit": "kg" } }
+            ]
+          },
+          {
+            "name": "Plank",
+            "sets": [ { "durationSeconds": 60 }, { "durationSeconds": 60 } ]
+          }
+        ],
+        "rpe": 8,
+        "notes": "Squats felt smooth, hips a bit tight."
+      },
+      {
+        "date": "2026-09-27",
+        "type": "ride",
+        "name": "Saturday long ride",
+        "durationMinutes": 150,
+        "distance": { "value": 62, "unit": "km" },
+        "elevationGain": { "value": 540, "unit": "m" },
+        "avgHeartRate": 138,
+        "avgPower": 165
+      },
+      {
+        "date": "2026-09-25",
+        "type": "run",
+        "durationMinutes": 32,
+        "distance": { "value": 5.2, "unit": "km" },
+        "avgHeartRate": 151
+      },
+      {
+        "date": "2026-09-24",
+        "type": "strength",
+        "name": "Upper body",
+        "durationMinutes": 50,
+        "exercises": [
+          {
+            "name": "Bench press",
+            "sets": [
+              { "reps": 6, "weight": { "value": 45, "unit": "kg" } },
+              { "reps": 6, "weight": { "value": 45, "unit": "kg" } }
+            ]
+          },
+          {
+            "name": "Pull-up",
+            "sets": [ { "reps": 5 }, { "reps": 4 } ]
+          }
+        ]
+      }
+    ]
+  },
+  "personalRecords": [
+    { "exercise": "Deadlift", "weight": { "value": 95, "unit": "kg" }, "reps": 1, "date": "2026-08-20" },
+    { "exercise": "Back squat", "weight": { "value": 80, "unit": "kg" }, "reps": 3, "date": "2026-09-10" },
+    { "exercise": "Bench press", "weight": { "value": 50, "unit": "kg" }, "reps": 2, "date": "2026-09-03" }
+  ],
+  "endurance": {
+    "ftpWatts": 190,
+    "restingHeartRate": 54,
+    "weeklyDistance": { "value": 90, "unit": "km" }
+  },
+  "injuries": [
+    {
+      "area": "Knee",
+      "side": "left",
+      "status": "recovering",
+      "notes": "Patellar tendon flares up after a lot of jumping.",
+      "avoid": ["box jumps", "deep lunges"]
+    }
+  ],
+  "schedule": {
+    "daysPerWeek": 4,
+    "preferredDays": ["mon", "wed", "fri", "sat"],
+    "sessionMinutes": 60,
+    "timeOfDay": "morning"
+  },
+  "equipment": {
+    "access": "full_gym",
+    "items": ["barbell", "dumbbells", "smart trainer"]
+  },
+  "nutrition": {
+    "style": "Mostly vegetarian",
+    "mealsPerDay": 3,
+    "restrictions": ["Vegetarian"],
+    "allergies": ["Peanuts"],
+    "likes": ["Mexican", "Indian"],
+    "dislikes": ["mushrooms"],
+    "habits": "Skips breakfast on busy days and snacks late in the evening."
+  },
+  "preferences": {
+    "coachTone": "direct",
+    "cardio": ["cycling", "running"],
+    "likes": ["short intense sessions"],
+    "dislikes": ["long treadmill runs"]
+  },
+  "whatWorked": [
+    "Three lifting days a week with one long ride kept me consistent.",
+    "Logging sleep made me go to bed earlier."
+  ],
+  "whatDidnt": [
+    "Five-day splits — I burned out after three weeks."
+  ],
+  "coachNotes": "Responds well to clear weekly targets. Travels for work about one week a month."
+}

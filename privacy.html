@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — HaiLife</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <div class="mark">H</div>
+    <div class="name"><a href="index.html">HaiLife</a></div>
+    <nav>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="support.html">Support</a>
+    </nav>
+  </header>
+
+  <h1>Privacy Policy</h1>
+  <div class="updated">Last updated: October 2026</div>
+
+  <h2>Data We Collect</h2>
+  <ul>
+    <li><strong>Location Data.</strong> GPS coordinates during active ride recording. Used to map routes, calculate distance/speed, and provide navigation. Background location is used only during active recording sessions. If you choose to share a ride live, your position is visible to anyone holding that ride&rsquo;s link until you stop sharing or the link expires &mdash; never otherwise.</li>
+    <li><strong>Health &amp; Fitness Data.</strong> Heart rate, heart-rate variability, sleep, steps, workouts and body metrics via Apple HealthKit. Used for training analytics (TSS, CTL/ATL), recovery, zone distribution and workout summaries. It stays on your device except for the logs that are part of your account backup while you&rsquo;re signed in, what is sent to an AI provider after you consent, and workouts you choose to sync to Strava (see below).</li>
+    <li><strong>Account Information.</strong> Name and email from Sign In with Apple. Used to personalize your profile and sync data across devices via our cloud service.</li>
+    <li><strong>Workout &amp; Training Data.</strong> Ride recordings, gym workout sessions, training plans, and gear information. Stored on your device and, while you&rsquo;re signed in, backed up to our cloud service (Supabase).</li>
+    <li><strong>Coach Conversations.</strong> Your chats with the AI coach, and what the coach remembers (goals, injuries and notes you share), are stored on your device and, while you&rsquo;re signed in, backed up to Supabase with your account so a new phone doesn&rsquo;t lose them. They are not stored in iCloud.</li>
+    <li><strong>Age.</strong> The first time you use AI features we ask your date of birth, to check you&rsquo;re 18 or older. Our servers keep only your age band (18+ or under 18) and how it was given &mdash; never the date itself. A birth date you add to your profile stays in your profile and its backup.</li>
+    <li><strong>Wellbeing Settings.</strong> If cautious mode is turned on, that setting and the reason for it stay on your device only. They are never backed up, and the AI coach is told only that cautious mode is on.</li>
+  </ul>
+
+  <h2>How We Use Your Data</h2>
+  <ul>
+    <li><strong>Training Analytics.</strong> Your ride and workout data is analyzed on-device to compute training load (TSS), fitness trends (CTL/ATL), and recovery recommendations.</li>
+    <li><strong>Cloud Backup.</strong> While you&rsquo;re signed in, the app automatically backs up your account to Supabase (our cloud provider): your athlete profile, coach chats and memory, plans, weigh-ins, food and habit logs, gym history and progress photos. Rides sync separately. For people under 18, health logs, coach chats and progress photos are not backed up. Nothing is stored in iCloud.</li>
+    <li><strong>Reports About AI Replies.</strong> If you report an AI reply, we receive the reason you pick and only the part of the conversation you choose to include, and use it solely to review the coach&rsquo;s safety.</li>
+    <li><strong>Strava Integration.</strong> When you connect Strava, we exchange OAuth tokens to import/export activities. Your Strava credentials are stored securely in the iOS Keychain.</li>
+    <li><strong>AI Features.</strong> AI coaching is optional and for people 18 and older. Before anything is sent, you give consent to the specific AI provider &mdash; Google Gemini, Anthropic Claude, OpenAI or xAI Grok &mdash; chosen under You &rarr; Training &rarr; AI Provider, and switching provider asks again. Only that provider receives your data. Google Gemini is included with HaiLife Pro and is reached through our server, which forwards each request and counts usage without storing its content. Claude, OpenAI and Grok use your own API key and are contacted directly from your phone. What is sent: your coaching conversation, first name, training metrics (power, heart-rate averages, CTL/ATL/TSB, FTP), body stats, goals, injuries and allergies you share, Apple Health data (heart-rate variability, sleep, resting heart rate, weight, steps, VO2 max) and &mdash; if you use the meal scanner &mdash; photos of your food. Recipe photos and the coach&rsquo;s voice are made by Google Gemini, which needs its own consent. GPS coordinates are never sent. Turn AI off at any time in Settings &rarr; AI &amp; Privacy; with AI off, nothing is sent to any AI provider.</li>
+  </ul>
+
+  <h2>Data Storage &amp; Security</h2>
+  <ul>
+    <li><strong>Local Storage.</strong> All workout data is stored in your device's Documents directory with automatic backup files. Keychain is used for all authentication tokens and API keys.</li>
+    <li><strong>Cloud Storage.</strong> Your account backup (including coach chats), athlete profile, rides and gym sessions are stored in Supabase with Row Level Security (RLS) &mdash; only you can access your data. All transmissions use TLS encryption.</li>
+    <li><strong>No Selling of Data.</strong> We do not sell, rent, or share your personal data with third parties for marketing or advertising purposes. Period.</li>
+  </ul>
+
+  <h2>Third-Party Services</h2>
+  <ul>
+    <li><strong>Strava.</strong> Activity import/export via their official API. Subject to Strava's own privacy policy.</li>
+    <li><strong>Supabase.</strong> Cloud database, sign-in, and the backup of your account data, including coach chats. It also runs the server that forwards Gemini requests for Pro. Data is stored in AWS data centers with SOC 2 compliance.</li>
+    <li><strong>Apple HealthKit.</strong> Read/write health data per your explicit permission grants. Apple prohibits using HealthKit data for advertising.</li>
+    <li><strong>AI Providers (Google, Anthropic, OpenAI, xAI).</strong> Optional AI coaching for people 18 and older, gated behind consent you give to each provider separately. Requests go only to the provider you select under You &rarr; Training &rarr; AI Provider (and to Google for recipe photos and voice, with its own consent). Data sent there is handled under that company's API terms and privacy policy; we do not control their retention. Withdraw consent or turn AI off at any time in Settings &rarr; AI &amp; Privacy.</li>
+  </ul>
+
+  <h2>Your Rights</h2>
+  <ul>
+    <li><strong>Access &amp; Export.</strong> You can export all your data at any time from You &rarr; Data &rarr; Data Backup.</li>
+    <li><strong>Deletion.</strong> You &rarr; Account &rarr; Delete Account permanently removes your account, all cloud data, and your sign-in identity from our servers, and wipes local data. Uninstalling the app removes all local data.</li>
+    <li><strong>Opt-Out.</strong> Strava, Apple Health and AI coaching are opt-in, and AI consent can be withdrawn per provider in Settings &rarr; AI &amp; Privacy. Cloud backup runs automatically while you&rsquo;re signed in; deleting your account removes it.</li>
+  </ul>
+
+  <h2>Age Requirements</h2>
+  <p>HaiLife is for people 13 and older. Coach chat, AI plans and other AI features, and weight-loss calorie targets, are for people 18 and older. For people under 18, health logs, coach chats and progress photos are not backed up to our servers.</p>
+
+  <h2>Contact</h2>
+  <p>For privacy inquiries: <a href="mailto:privacy@tuckerpratt.com">privacy@tuckerpratt.com</a></p>
+
+  <footer class="site">© 2026 HaiLife · <a href="terms.html">Terms of Service</a> · <a href="support.html">Support</a></footer>
+</div>
+</body>
+</html>

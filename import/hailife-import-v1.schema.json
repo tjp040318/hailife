@@ -1,0 +1,277 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tjp040318.github.io/hailife/import/hailife-import-v1.schema.json",
+  "title": "HaiLife import file, version 1",
+  "description": "What another AI assistant knows about a person's training, goals and habits, in a form HaiLife can check and import. Every field except schemaVersion is optional: leave out anything you do not know. HaiLife reads this leniently (unknown fields are ignored, a bad field is dropped on its own), but a file that passes this schema imports completely. Human-readable spec: hailife-import-v1.md.",
+  "type": "object",
+  "required": ["schemaVersion"],
+  "additionalProperties": false,
+  "$defs": {
+    "date": {
+      "description": "A calendar date, YYYY-MM-DD. A full ISO 8601 date-time is also accepted.",
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}([T ].*)?$"
+    },
+    "shortText": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "note": { "type": "string", "minLength": 1, "maxLength": 500 },
+    "textList": {
+      "type": "array",
+      "maxItems": 30,
+      "items": { "$ref": "#/$defs/shortText" }
+    },
+    "massUnit": { "enum": ["kg", "lb"] },
+    "mass": {
+      "description": "A mass with its unit. A bare number is accepted only when units.weight is set.",
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["value", "unit"],
+          "additionalProperties": false,
+          "properties": {
+            "value": { "type": "number", "minimum": 0, "maximum": 1100 },
+            "unit": { "$ref": "#/$defs/massUnit" }
+          }
+        },
+        { "type": "number", "minimum": 0, "maximum": 1100 }
+      ]
+    },
+    "height": {
+      "description": "Body height with its unit. A bare number is accepted only when units.height is set.",
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["value", "unit"],
+          "additionalProperties": false,
+          "properties": {
+            "value": { "type": "number", "exclusiveMinimum": 0, "maximum": 300 },
+            "unit": { "enum": ["cm", "m", "in"] }
+          }
+        },
+        { "type": "number", "exclusiveMinimum": 0, "maximum": 300 }
+      ]
+    },
+    "distance": {
+      "description": "A distance with its unit. A bare number is accepted only when units.distance is set.",
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["value", "unit"],
+          "additionalProperties": false,
+          "properties": {
+            "value": { "type": "number", "exclusiveMinimum": 0, "maximum": 1000000 },
+            "unit": { "enum": ["km", "mi", "m"] }
+          }
+        },
+        { "type": "number", "exclusiveMinimum": 0, "maximum": 1000000 }
+      ]
+    },
+    "elevation": {
+      "description": "Elevation gain with its unit. A bare number is accepted only when units.elevation is set.",
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["value", "unit"],
+          "additionalProperties": false,
+          "properties": {
+            "value": { "type": "number", "minimum": 0, "maximum": 20000 },
+            "unit": { "enum": ["m", "ft"] }
+          }
+        },
+        { "type": "number", "minimum": 0, "maximum": 20000 }
+      ]
+    },
+    "goalId": { "enum": ["strength", "fat_loss", "endurance", "nutrition", "sleep", "mindset", "healthy"] },
+    "set": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "reps": { "type": "integer", "minimum": 1, "maximum": 100 },
+        "weight": { "$ref": "#/$defs/mass" },
+        "durationSeconds": { "type": "integer", "minimum": 1, "maximum": 3600 },
+        "rpe": { "type": "number", "minimum": 1, "maximum": 10 }
+      }
+    },
+    "exercise": {
+      "type": "object",
+      "required": ["name"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "$ref": "#/$defs/shortText" },
+        "sets": { "type": "array", "maxItems": 30, "items": { "$ref": "#/$defs/set" } }
+      }
+    },
+    "session": {
+      "type": "object",
+      "required": ["date", "type"],
+      "additionalProperties": false,
+      "properties": {
+        "date": { "$ref": "#/$defs/date" },
+        "type": { "enum": ["strength", "ride", "indoor_ride", "run", "walk", "hike", "swim", "row", "other"] },
+        "name": { "$ref": "#/$defs/shortText" },
+        "durationMinutes": { "type": "number", "exclusiveMinimum": 0, "maximum": 1440 },
+        "exercises": { "type": "array", "maxItems": 40, "items": { "$ref": "#/$defs/exercise" } },
+        "distance": { "$ref": "#/$defs/distance" },
+        "elevationGain": { "$ref": "#/$defs/elevation" },
+        "avgHeartRate": { "type": "integer", "minimum": 30, "maximum": 230 },
+        "maxHeartRate": { "type": "integer", "minimum": 30, "maximum": 240 },
+        "avgPower": { "type": "integer", "minimum": 1, "maximum": 2000 },
+        "rpe": { "type": "number", "minimum": 1, "maximum": 10 },
+        "notes": { "$ref": "#/$defs/note" }
+      }
+    }
+  },
+  "properties": {
+    "format": { "const": "hailife-import" },
+    "schemaVersion": { "const": 1 },
+    "generatedBy": { "$ref": "#/$defs/shortText" },
+    "generatedAt": { "$ref": "#/$defs/date" },
+    "units": {
+      "description": "Defaults for bare numbers. A value written as an object with its own unit always wins.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "weight": { "$ref": "#/$defs/massUnit" },
+        "height": { "enum": ["cm", "m", "in"] },
+        "distance": { "enum": ["km", "mi", "m"] },
+        "elevation": { "enum": ["m", "ft"] }
+      }
+    },
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ageRange": { "enum": ["13-17", "18-24", "25-34", "35-44", "45-54", "55-64", "65+"] },
+        "sex": { "enum": ["female", "male"] },
+        "height": { "$ref": "#/$defs/height" },
+        "weightTrend": {
+          "description": "Body weight over time, oldest first.",
+          "type": "array",
+          "maxItems": 120,
+          "items": {
+            "type": "object",
+            "required": ["date", "weight"],
+            "additionalProperties": false,
+            "properties": {
+              "date": { "$ref": "#/$defs/date" },
+              "weight": { "$ref": "#/$defs/mass" }
+            }
+          }
+        },
+        "experience": { "enum": ["beginner", "intermediate", "advanced"] },
+        "trainingYears": { "type": "number", "minimum": 0, "maximum": 80 }
+      }
+    },
+    "goals": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "focus": { "type": "array", "maxItems": 3, "uniqueItems": true, "items": { "$ref": "#/$defs/goalId" } },
+        "primary": { "$ref": "#/$defs/goalId" },
+        "why": { "$ref": "#/$defs/note" }
+      }
+    },
+    "training": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sessions": { "type": "array", "maxItems": 1000, "items": { "$ref": "#/$defs/session" } }
+      }
+    },
+    "personalRecords": {
+      "type": "array",
+      "maxItems": 200,
+      "items": {
+        "type": "object",
+        "required": ["exercise", "weight"],
+        "additionalProperties": false,
+        "properties": {
+          "exercise": { "$ref": "#/$defs/shortText" },
+          "weight": { "$ref": "#/$defs/mass" },
+          "reps": { "type": "integer", "minimum": 1, "maximum": 100 },
+          "date": { "$ref": "#/$defs/date" }
+        }
+      }
+    },
+    "endurance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ftpWatts": { "type": "integer", "minimum": 50, "maximum": 600 },
+        "maxHeartRate": { "type": "integer", "minimum": 100, "maximum": 240 },
+        "restingHeartRate": { "type": "integer", "minimum": 25, "maximum": 120 },
+        "weeklyDistance": { "$ref": "#/$defs/distance" }
+      }
+    },
+    "injuries": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "required": ["area"],
+        "additionalProperties": false,
+        "properties": {
+          "area": { "$ref": "#/$defs/shortText" },
+          "side": { "enum": ["left", "right", "both"] },
+          "status": { "enum": ["current", "recovering", "past"] },
+          "notes": { "$ref": "#/$defs/note" },
+          "avoid": { "$ref": "#/$defs/textList" }
+        }
+      }
+    },
+    "schedule": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "daysPerWeek": { "type": "integer", "minimum": 1, "maximum": 7 },
+        "preferredDays": {
+          "type": "array",
+          "maxItems": 7,
+          "uniqueItems": true,
+          "items": { "enum": ["mon", "tue", "wed", "thu", "fri", "sat", "sun"] }
+        },
+        "sessionMinutes": { "type": "integer", "minimum": 10, "maximum": 300 },
+        "timeOfDay": { "enum": ["morning", "midday", "evening", "flexible"] }
+      }
+    },
+    "equipment": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "access": { "enum": ["full_gym", "home_gym", "bodyweight"] },
+        "items": { "$ref": "#/$defs/textList" }
+      }
+    },
+    "nutrition": {
+      "description": "Habits only. Calorie and macro targets are deliberately not part of this format: HaiLife sets those itself, within its safety guardrails.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "style": { "$ref": "#/$defs/shortText" },
+        "mealsPerDay": { "type": "integer", "minimum": 1, "maximum": 8 },
+        "restrictions": { "$ref": "#/$defs/textList" },
+        "allergies": { "$ref": "#/$defs/textList" },
+        "likes": { "$ref": "#/$defs/textList" },
+        "dislikes": { "$ref": "#/$defs/textList" },
+        "habits": { "type": "string", "minLength": 1, "maxLength": 1000 }
+      }
+    },
+    "preferences": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "coachTone": { "enum": ["supportive", "direct", "analytical"] },
+        "cardio": {
+          "type": "array",
+          "maxItems": 7,
+          "uniqueItems": true,
+          "items": { "enum": ["cycling", "running", "walking", "swimming", "rowing", "hiking", "classes"] }
+        },
+        "likes": { "$ref": "#/$defs/textList" },
+        "dislikes": { "$ref": "#/$defs/textList" }
+      }
+    },
+    "whatWorked": { "type": "array", "maxItems": 15, "items": { "$ref": "#/$defs/note" } },
+    "whatDidnt": { "type": "array", "maxItems": 15, "items": { "$ref": "#/$defs/note" } },
+    "coachNotes": { "type": "string", "minLength": 1, "maxLength": 2000 }
+  }
+}
